@@ -10,6 +10,8 @@ class
 inherit
 	COUNTABLE_SEQUENCE [GMP_INTEGER]
 
+	ITERATION_CURSOR [GMP_INTEGER]
+
 create
 	make
 
@@ -57,6 +59,12 @@ feature -- Access
 			end
 			create Result
 			Result.copy (last_i_th)
+		end
+
+	new_cursor: MPZ_RANDOM
+			-- Fresh cursor associated with current structure
+		do
+			create Result.make (maximum_value)
 		end
 
 feature -- Measurement

@@ -1,4 +1,4 @@
-note
+﻿note
 
 	description: "Arbitrary precision integer"
 
@@ -494,14 +494,14 @@ feature -- Basic operations
 			{MPZ_FUNCTIONS}.mpz_add (Result.item, item, a_other.item)
 		end
 
-	minus alias "-" (a_other: like Current): like Current
+	minus alias "-" alias "−" (a_other: like Current): like Current
 			-- Subtraction of `a_other' from `Current'
 		do
 			create Result
 			{MPZ_FUNCTIONS}.mpz_sub (Result.item, item, a_other.item)
 		end
 
-	product alias "*" (a_other: like Current): like Current
+	product alias "*" alias "×" (a_other: like Current): like Current
 			-- Product of `Current' with `a_other'
 		do
 			create Result
@@ -546,7 +546,7 @@ feature -- Basic operations
 			{MPZ_FUNCTIONS}.mpz_set (Result.item, item)
 		end
 
-	opposite alias "-": like Current
+	opposite alias "-" alias "−": like Current
 			-- Unary minus
 		do
 			create Result

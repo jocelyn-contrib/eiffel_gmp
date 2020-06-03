@@ -1,4 +1,4 @@
-note
+﻿note
 
 	description: "Rational numbers"
 
@@ -49,7 +49,7 @@ inherit
 			out
 		end
 
-create 
+create
 
 	default_create,
 	make_integer_32,
@@ -63,7 +63,7 @@ create
 	make_string
 
 
-feature {NONE} 
+feature {NONE}
 
 	make_integer_32 (v: INTEGER_32)
 			-- Initialize as `v'/1.
@@ -93,7 +93,7 @@ feature {NONE}
 	make_gmp_integer (v: GMP_INTEGER)
 			-- Initialize as `v'/1.
 		require
-			v_attached: v /= Void	
+			v_attached: v /= Void
 		do
 			default_create
 			set_gmp_integer (v)
@@ -121,7 +121,7 @@ feature {NONE}
 	make_natural_32_2 (v1, v2: NATURAL_32)
 			-- Initialize as `v1'/`v2'.
 		require
-			v2_not_zero: v2 /~ 0	
+			v2_not_zero: v2 /~ 0
 		do
 			default_create
 			set_natural_2 (v1, v2)
@@ -143,7 +143,7 @@ feature {NONE}
 			default_create
 			set_string (v)
 		end
-	
+
 feature -- Access
 
 	numerator: GMP_INTEGER assign set_numerator
@@ -184,7 +184,7 @@ feature -- Access
 		do
 			create Result
 		end
-	
+
 feature -- Status report
 
 	precision: NATURAL_32
@@ -267,9 +267,9 @@ feature -- Status report
 
 	set_string_successful: BOOLEAN
 			-- Did last call to `set_string'/`make_string' succeed?
-			-- Must be true if precondition were met and no exception 
+			-- Must be true if precondition were met and no exception
 			-- were raised.
-	
+
 feature -- Comparison
 
 	is_equal (other: like Current): BOOLEAN
@@ -283,7 +283,7 @@ feature -- Comparison
 		do
 			Result := {MPQ_FUNCTIONS}.mpq_cmp (item, other.item) < 0
 		end
-	
+
 feature -- Setting
 
 	set_numerator (v: GMP_INTEGER)
@@ -315,7 +315,7 @@ feature -- Setting
 		end
 
 	set_integer_2 (v1: INTEGER_32; v2: NATURAL_32)
-			-- Set `Current' to value of `v1'/`v2' reduced to canonical 
+			-- Set `Current' to value of `v1'/`v2' reduced to canonical
 			-- form.
 		require
 			v2_not_zero: v2 /~ 0
@@ -327,7 +327,7 @@ feature -- Setting
 	set_gmp_float (v: GMP_FLOAT)
 			-- Set `Current' to exact value of `v'.
 		require
-			v_attached: v /= Void	
+			v_attached: v /= Void
 		do
 			{MPQ_FUNCTIONS}.mpq_set_f (item, v.item)
 		end
@@ -335,7 +335,7 @@ feature -- Setting
 	set_gmp_integer (v: GMP_INTEGER)
 			-- Set `Current' to `v'/1.
 		require
-			v_attached: v /= Void	
+			v_attached: v /= Void
 		do
 			{MPQ_FUNCTIONS}.mpq_set_z (item, v.item)
 		ensure
@@ -350,7 +350,7 @@ feature -- Setting
 		end
 
 	set_natural_2 (v1, v2: NATURAL_32)
-			-- Set `Current' to value of `v1'/`v2' reduced to canonical 
+			-- Set `Current' to value of `v1'/`v2' reduced to canonical
 			-- form.
 		require
 			v2_not_zero: v2 /~ 0
@@ -368,7 +368,7 @@ feature -- Setting
 	set_string (v: STRING_8)
 			-- Set `Current' to `v' interpreted as a rational number.
 		require
-			v_attached: v /= Void		
+			v_attached: v /= Void
 			v_is_decimal_rational_string: is_decimal_rational_string (v)
 		do
 			set_string_successful := {MPQ_FUNCTIONS}.mpq_set_str (item, (create {C_STRING}.make (v)).item, Decimal) = 0
@@ -376,8 +376,8 @@ feature -- Setting
 		ensure
 			set_string_successful: set_string_successful
 		end
-	
-feature 
+
+feature
 
 	as_gmp_integer: GMP_INTEGER
 			-- Truncation of `Current' to an integer
@@ -427,7 +427,7 @@ feature
 		do
 			Result := {MPQ_FUNCTIONS}.mpq_get_d (item)
 		end
-	
+
 feature -- Duplication
 
 	copy (a_other: like Current)
@@ -438,7 +438,7 @@ feature -- Duplication
 			end
 			{MPQ_FUNCTIONS}.mpq_set (item, a_other.item)
 		end
-	
+
 feature -- Basic operations
 
 	abs: like Current
@@ -458,21 +458,21 @@ feature -- Basic operations
 			{MPQ_FUNCTIONS}.mpq_add (Result.item, item, other.item)
 		end
 
-	minus alias "-" (other: like Current): like Current
+	minus alias "-" alias "−" (other: like Current): like Current
 			-- <Precursor>
 		do
 			create Result
 			{MPQ_FUNCTIONS}.mpq_sub (Result.item, item, other.item)
 		end
 
-	product alias "*" (other: like Current): like Current
+	product alias "*" alias "×" (other: like Current): like Current
 			-- <Precursor>
 		do
 			create Result
 			{MPQ_FUNCTIONS}.mpq_mul (Result.item, item, other.item)
 		end
 
-	quotient alias "/" (other: like Current): like Current
+	quotient alias "/" alias "÷" (other: like Current): like Current
 			-- <Precursor>
 		do
 			create Result
@@ -486,7 +486,7 @@ feature -- Basic operations
 			{MPQ_FUNCTIONS}.mpq_set (Result.item, item)
 		end
 
-	opposite alias "-": like Current
+	opposite alias "-" alias "−": like Current
 			-- <Precursor>
 		do
 			create Result
@@ -501,7 +501,7 @@ feature -- Basic operations
 			create Result
 			{MPQ_FUNCTIONS}.mpq_inv (Result.item, item)
 		end
-	
+
 feature -- Output
 
 	out: STRING_8
@@ -513,27 +513,27 @@ feature -- Output
 				Result := numerator.out + " / " + denominator.out
 			end
 		end
-	
+
 feature -- Status report
 
 	exponentiable (other: NUMERIC): BOOLEAN
 		obsolete "[2008_04_01] Will be removed since not used."
 		do
 		end
-	
+
 feature {NONE} -- Number bases for string setting
 
 	Binary: INTEGER_32 = 2
 			-- Base 2
-	
+
 	Decimal: INTEGER_32 = 10
 			-- Base 10
-	
+
 	Hexadecimal: INTEGER_32 = 16
 			-- Base 16
-	
+
 invariant
-	
+
 	denominator_not_zero: denominator /~ denominator.zero
 
 end

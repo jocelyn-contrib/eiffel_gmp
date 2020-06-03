@@ -12,7 +12,7 @@ inherit
 
 	INFINITE_SEQUENCE [GMP_INTEGER]
 		redefine
-			valid_iteration_start, lower_bound
+			valid_iteration_start
 		end
 
 feature -- Access
@@ -33,7 +33,7 @@ feature -- Access
 	item alias "[]" (a_index: GMP_INTEGER): GMP_INTEGER
 			-- Value associated with `a_index';
 			-- Efficient only when `a_index.fits_natural_32' holds.
-			-- Otherwise we have to enumerate all the numbers from 
+			-- Otherwise we have to enumerate all the numbers from
 			-- {NATURAL_32}.Max_value
 		local
 			l_start_index: GMP_INTEGER
@@ -61,7 +61,7 @@ feature -- Status report
 	default_descending: BOOLEAN
 			-- Does the index decrease by default when iterating?
 			-- (Answer - No)
-	
+
 	valid_direction (a_descending: BOOLEAN): BOOLEAN
 			-- Is `a_descending' a valid iteration direction for `Current'?
 		do
@@ -83,7 +83,7 @@ feature -- Iteration
 		do
 			create Result.make (Current, a_start_position)
 		end
-	
+
 	ascending_from (a_start_position: GMP_INTEGER): like at
 			-- New ascending iterator pointing to `a_start_position'
 		do
@@ -97,7 +97,7 @@ feature -- Iteration
 			-- to satisfy void-safety compiler:
 			Result := ascending_from (a_start_position)
 		end
-	
+
 invariant
 
 	ascending_iteration_only: not default_descending

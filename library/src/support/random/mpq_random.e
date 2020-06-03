@@ -10,6 +10,8 @@ class
 inherit
 	COUNTABLE_SEQUENCE [GMP_RATIONAL]
 
+	ITERATION_CURSOR [GMP_RATIONAL]
+
 create
 	make
 
@@ -64,6 +66,12 @@ feature -- Access
 			create Result
 			Result.set_numerator (last_i_th_numerator.to_gmp_integer)
 			Result.set_denominator (last_i_th_denominator.to_gmp_integer)
+		end
+
+	new_cursor: MPQ_RANDOM
+			-- Fresh cursor associated with current structure
+		do
+			create Result.make (maximum_value_numerator, maximum_value_denominator)
 		end
 
 feature -- Measurement

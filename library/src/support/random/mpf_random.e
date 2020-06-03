@@ -10,6 +10,8 @@ class
 inherit
 	COUNTABLE_SEQUENCE [GMP_FLOAT]
 
+	ITERATION_CURSOR [GMP_FLOAT]
+
 create
 	make
 
@@ -55,6 +57,12 @@ feature -- Access
 			end
 			create Result
 			Result.copy (last_i_th)
+		end
+
+	new_cursor: MPF_RANDOM
+			-- Fresh cursor associated with current structure
+		do
+			create Result.make (precision)
 		end
 
 feature -- Measurement

@@ -1,4 +1,4 @@
-note
+﻿note
 
 	description: "Floating point numbers"
 
@@ -50,7 +50,7 @@ inherit
 		end
 
 create
-	
+
 	default_create,
 	make_integer_32,
 	make_integer_32_with_precision,
@@ -90,7 +90,7 @@ feature {NONE} -- Initialization
 			-- Initialize from `v'.
 			-- `precision' will be the default precision.
 		require
-			v_attached: v /= Void	
+			v_attached: v /= Void
 		do
 			default_create
 			set_gmp_rational (v)
@@ -101,7 +101,7 @@ feature {NONE} -- Initialization
 			-- `precision' will be >= `prec'.
 		require
 			v_attached: v /= Void
-			a_prec_not_too_large: a_prec < ({NATURAL_32}.Max_value - 64)			
+			a_prec_not_too_large: a_prec < ({NATURAL_32}.Max_value - 64)
 		do
 			make_precision (a_prec)
 			{MPF_FUNCTIONS}.mpf_set_q (item, v.item)
@@ -140,7 +140,7 @@ feature {NONE} -- Initialization
 			-- Initialize from `v'.
 			-- `precision' will be >= `prec'.
 		require
-			a_prec_not_too_large: a_prec < ({NATURAL_32}.Max_value - 64)	
+			a_prec_not_too_large: a_prec < ({NATURAL_32}.Max_value - 64)
 		do
 			make_precision (a_prec)
 			set_natural_32 (v)
@@ -351,7 +351,7 @@ feature -- Element change
 	set_gmp_integer (v: GMP_INTEGER)
 			-- Set from `v'.
 		require
-			v_attached: v /= Void	
+			v_attached: v /= Void
 		do
 			set_precision (v.precision.max ({PLATFORM}.real_64_bits.to_natural_32))
 			{MPF_FUNCTIONS}.mpf_set_z (item, v.item)
@@ -525,7 +525,7 @@ feature -- Basic operations
 			result_precision_greater_equal_precision_max_other_precision: Result.precision >= precision.max (a_other.precision)
 		end
 
-	minus alias "-" (a_other: like Current): like Current
+	minus alias "-" alias "−" (a_other: like Current): like Current
 			-- Subtraction of `a_other' from `Current'
 		do
 			create Result.make_precision (precision.max (a_other.precision))
@@ -534,7 +534,7 @@ feature -- Basic operations
 			result_precision_greater_equal_precision_max_other_precision: Result.precision >= precision.max (a_other.precision)
 		end
 
-	product alias "*" (a_other: like Current): like Current
+	product alias "*" alias "×" (a_other: like Current): like Current
 			-- Product of `Current' with `a_other'
 		do
 			create Result.make_precision (precision.max (a_other.precision))
@@ -543,7 +543,7 @@ feature -- Basic operations
 			result_precision_greater_equal_precision_max_other_precision: Result.precision >= precision.max (a_other.precision)
 		end
 
-	quotient alias "/" (a_other: like Current): like Current
+	quotient alias "/" alias "÷" (a_other: like Current): like Current
 			-- Division of `Current' by `a_other'
 		do
 			create Result.make_precision (precision.max (a_other.precision))
@@ -561,7 +561,7 @@ feature -- Basic operations
 			result_precision_greater_equal_precision: Result.precision >= precision
 		end
 
-	opposite alias "-": like Current
+	opposite alias "-" alias "−": like Current
 			-- Unary minus
 		do
 			create Result.make_precision (precision)
